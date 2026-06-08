@@ -4,7 +4,7 @@
     "slug": "cambiazo-mobile",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/icon-exchange.png",
     "scheme": "cambiazomobile",
     "userInterfaceStyle": "automatic",
     "ios": {
@@ -29,11 +29,13 @@
       [
         "expo-splash-screen",
         {
-          "backgroundColor": "#208AEF",
-          "android": {
-            "image": "./assets/images/splash-icon.png",
-            "imageWidth": 76
-          }
+          "backgroundColor": "#0A6B2D",
+          "image": "./assets/images/splash-icon-exchange.png",
+          "dark": {
+            "image": "./assets/images/splash-icon-exchange.png",
+            "backgroundColor": "#000000"
+          },
+          "imageWidth": 200
         }
       ]
     ],
