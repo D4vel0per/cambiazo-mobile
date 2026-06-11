@@ -2,13 +2,17 @@
   "expo": {
     "name": "cambiazo-mobile",
     "slug": "cambiazo-mobile",
-    "version": "1.0.0",
+    "version": "1.0.2",
     "orientation": "portrait",
     "icon": "./assets/images/icon-exchange.png",
     "scheme": "cambiazomobile",
     "userInterfaceStyle": "automatic",
     "ios": {
-      "icon": "./assets/expo.icon"
+      "icon": "./assets/expo.icon",
+      "bundleIdentifier": "com.d4veloper.cambiazomobile",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -21,8 +25,7 @@
       "package": "com.d4veloper.cambiazomobile"
     },
     "web": {
-      "output": "static",
-      "favicon": "./assets/images/favicon.png"
+      "output": "server"
     },
     "plugins": [
       "expo-router",
@@ -35,7 +38,7 @@
             "image": "./assets/images/splash-icon-exchange.png",
             "backgroundColor": "#000000"
           },
-          "imageWidth": 200
+          "imageWidth": 400
         }
       ]
     ],
@@ -48,6 +51,12 @@
       "eas": {
         "projectId": "5dc5f9f2-8ab1-4530-a37b-189e32763bc7"
       }
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/5dc5f9f2-8ab1-4530-a37b-189e32763bc7"
     }
   }
 }

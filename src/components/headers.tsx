@@ -24,15 +24,15 @@ export function H3 ({ children }: { children: string }) {
     )
 }
 
-export function H4 ({ children }: { children: string }) {
+export function H4 ({ children, style }: { children: string, style: Record<string, any> }) {
     return (
-        <View style={styles.container}>
+        <View style={[styles.container, style]}>
             <Text style={styles.h4}>{children}</Text>
         </View>
     )
 }
 
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
