@@ -22,7 +22,10 @@
       "output": "server"
     },
     "plugins": [
-      "expo-router",
+      [
+        "expo-router",
+        { "origin":"https://cambiazo-mobile.expo.app" }
+      ],
       [
         "expo-splash-screen",
         {
@@ -32,9 +35,11 @@
             "image": "./assets/images/splash-icon-exchange.png",
             "backgroundColor": "#000000"
           },
-          "imageWidth": 512,
-          "imageHeight": 512
+          "imageWidth": 200,
+          "imageHeight": 200
         }
+        
+        
       ],
       "@react-native-vector-icons/ionicons",
       "expo-image"

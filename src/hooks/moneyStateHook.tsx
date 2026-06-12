@@ -48,6 +48,8 @@ export function useMoneyState (initialCurrency: Currency): [MoneyState, React.Di
 
         const result: MoneyState = await state.json()
 
+        await store.setLastState(result)
+
         setMoneyState(result)
     })()}, [])
 
