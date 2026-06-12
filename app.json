@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "cambiazo-mobile",
+    "name": "Cambiazo!",
     "slug": "cambiazo-mobile",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "orientation": "portrait",
     "icon": "./assets/images/icon-exchange.png",
     "scheme": "cambiazomobile",
@@ -15,12 +15,6 @@
       }
     },
     "android": {
-      "adaptiveIcon": {
-        "backgroundColor": "#E6F4FE",
-        "foregroundImage": "./assets/images/android-icon-foreground.png",
-        "backgroundImage": "./assets/images/android-icon-background.png",
-        "monochromeImage": "./assets/images/android-icon-monochrome.png"
-      },
       "predictiveBackGestureEnabled": false,
       "package": "com.d4veloper.cambiazomobile"
     },
@@ -38,10 +32,12 @@
             "image": "./assets/images/splash-icon-exchange.png",
             "backgroundColor": "#000000"
           },
-          "imageWidth": 400
+          "imageWidth": 512,
+          "imageHeight": 512
         }
       ],
-      "@react-native-vector-icons/ionicons"
+      "@react-native-vector-icons/ionicons",
+      "expo-image"
     ],
     "experiments": {
       "typedRoutes": true,
