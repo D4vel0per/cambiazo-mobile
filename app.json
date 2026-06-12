@@ -2,7 +2,7 @@
   "expo": {
     "name": "Cambiazo!",
     "slug": "cambiazo-mobile",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "orientation": "portrait",
     "icon": "./assets/images/icon-exchange.png",
     "scheme": "cambiazomobile",
@@ -33,10 +33,9 @@
           "image": "./assets/images/splash-icon-exchange.png",
           "dark": {
             "image": "./assets/images/splash-icon-exchange.png",
-            "backgroundColor": "#000000"
+            "backgroundColor": "#0A6B2D"
           },
-          "imageWidth": 200,
-          "imageHeight": 200
+          "imageWidth": 150
         }
         
         
