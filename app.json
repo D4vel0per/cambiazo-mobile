@@ -40,7 +40,8 @@
           },
           "imageWidth": 400
         }
-      ]
+      ],
+      "@react-native-vector-icons/ionicons"
     ],
     "experiments": {
       "typedRoutes": true,

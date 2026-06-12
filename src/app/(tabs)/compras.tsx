@@ -1,36 +1,28 @@
 import SafeArea from "@/components/safeAreaWrapper";
+import Title from "@/components/title";
+import { BACKGROUND, BACKGROUND_TEXT, BAD, BUTTON, MAIN, MAIN_ALT } from "@/constants/colors";
 import { CAROUSEL_INITIAL_VALUES, RENDER_CURRENCY } from "@/constants/main";
 import { useMoneyState } from "@/hooks/moneyStateHook";
 import { useSimpleCarousel } from "@/hooks/useSimpleCarousel";
 import { Currency } from "@/types/moneyStateTypes";
-import { PlaywriteGBJ_400Regular, useFonts } from "@expo-google-fonts/dev";
+import Ionicons from "@react-native-vector-icons/ionicons";
 import { useEffect, useState } from "react";
 import { FlatList, Pressable, StyleSheet, Text, TextInput, TextInputProps, TextStyle, View, ViewStyle } from "react-native";
+import { FONT } from "./_layout";
 
 export default function Compras () {
-    const [ loadedFonts ] = useFonts({PlaywriteGBJ_400Regular})
-
-    return loadedFonts ? (
+    return (
         <SafeArea>
             <Screen />
         </SafeArea>
-    ) : <SafeArea><Text>Loading...</Text></SafeArea>
+    )
 }
 
 function Screen () {
     return (
         <View style={styles.container}>
-            <Title />
+            <Title name="Compras!"/>
             <ProductContainer />
-        </View>
-    )
-}
-
-function Title () {
-    return (
-        <View style={styles.title}>
-            <Text style={styles["title.text"]}>Compras!</Text>
-
         </View>
     )
 }
@@ -76,13 +68,13 @@ function AddProduct ({ submitProduct }: {
                         return newProduct
                     })
             }} style={styles.addProductButton}>
-                <Text style={{fontSize: 18, textAlign: "center"}}>{RENDER_CURRENCY[currencies[0]]}</Text>
+                <Text style={{fontSize: 18, textAlign: "center", fontFamily: FONT}}>{RENDER_CURRENCY[currencies[0]]}</Text>
             </Pressable>
             <View style={styles.addProductInput}>
                 <TextInput 
                 inputMode="decimal"
                 value={currentPriceText || "0"}
-                style={{fontSize: styles.addProductInput.fontSize}}
+                style={{fontSize: styles.addProductInput.fontSize, fontFamily: FONT}}
                 onChangeText={(text) => {
                     text = (
                         text.startsWith("0") ? 
@@ -108,7 +100,11 @@ function AddProduct ({ submitProduct }: {
                     ...prev, 
                 }))
             }} style={[styles.addProductButton, {flex: 2}]}>
-                <Text style={{fontSize: 20}}>+</Text>
+                <Ionicons 
+                    name="bag-add" 
+                    color={BACKGROUND_TEXT}
+                    size={24}
+                />
             </Pressable>
         </View>
     )
@@ -176,9 +172,33 @@ function ProductSection ({ products, setProducts }: {
             />
         )}
         ListEmptyComponent={(
-            <View>
-                <Text>Empiece a agregar sus compras!</Text>
+            <View style={{ alignItems: "center"}}>
+                <View style={{flexDirection: "row"}}>
+                    <Ionicons
+                    name="cart-outline"
+                    size={100}
+                    color={BUTTON}
+                    />
+                    <View style={{ 
+                        transform: [{ rotate: "30deg" }]
+                    }}>
+                        <Ionicons
+                        name="help"
+                        size={60}
+                        color={BAD}
+                        style={{position: "relative", right: 10, top: 50}}
+                        />
+                    </View>
+                    
+                </View>
+                <Text style={{
+                    fontSize: 18, 
+                    fontFamily: FONT, 
+                    color: BUTTON,
+                    textAlign: "center"
+                    }}>¡Ay!—¿Todavía no hay nada?</Text>
             </View>
+            
         )}
 
         />
@@ -210,22 +230,32 @@ function Product ({ product, setProduct, deleteProduct }: {
             <TouchText
             containerStyle={styles.productItemInput}
             textStyle={styles.productItemText}
-            inputStyle={[styles.productItemText, { backgroundColor: "#106891" }]}
+            inputStyle={[styles.productItemText, { backgroundColor: BUTTON }]}
             value={product.name}
             onChangeText={(text) => setProduct({ ...product, name: text })}
             inputMode="text"
             />
             <Pressable onPress={deleteProduct} style={styles.productItemDelete}>
-                <Text>X</Text>
+                <Ionicons 
+                name="bag-remove"
+                size={24}
+                color={BACKGROUND_TEXT}
+                
+                />
             </Pressable>
         </View>
         <View style={styles.productItemTextContainer}>
             <TouchText
             containerStyle={{flex: 1}}
             textStyle={styles.productItemText}
-            inputStyle={[styles.productItemText, { backgroundColor: "#065e4b" }]}
+            inputStyle={[styles.productItemText, { backgroundColor: MAIN_ALT }]}
             value={currentPriceText || "0"}
             onChangeText={(text) => {
+                text = (
+                        text.startsWith("0") ? 
+                            text.length > 1 ? text.replace(/^0/, "") : text
+                        : text
+                    )
                 setCurrentPriceText(text)
                 setProduct({ ...product, price: parseFloat(text.replace(",", ".")) || 0 })
             }}
@@ -284,33 +314,21 @@ function TouchText ({onChangeText, containerStyle, textStyle, inputStyle, value,
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#258a60"
-    },
-    title: {
-        padding: 10,
-        justifyContent: "flex-start",
-        backgroundColor: "#0b745d"
-    },
-    "title.text": {
-        fontSize: 24,
-        fontFamily: "PlaywriteGBJ_400Regular",
-        color: "#ffffff",
-        textAlign: "center"
+        backgroundColor: BACKGROUND
     },
     addProductInput: {
-        backgroundColor: "#b0f5e6",
+        backgroundColor: MAIN,
         flex: 8,
         justifyContent: "center",
-        fontSize: 24
+        fontSize: 20,
     },
     addProductContainer: {
         flexDirection: "row",
-        flex: 7,
-        backgroundColor: "#ff6a6a"
+        flex: 8,
     },
     addProductButton: {
         flex: 6,
-        backgroundColor: "#0b745d",
+        backgroundColor: BUTTON,
         justifyContent: "center",
         alignItems: "center"
     },
@@ -320,14 +338,13 @@ const styles = StyleSheet.create({
     },
     productSection: {
         flex: 64,
-        backgroundColor: "#38a38c",
     },
     productSectionScroll: {
         padding: 15,
         gap: 20
     },
     productItem: {
-        backgroundColor: "#0b745d",
+        backgroundColor: MAIN,
         borderRadius: 10
     },
     productItemInput: {
@@ -337,11 +354,11 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "#993838",
+        backgroundColor: BAD,
         borderTopRightRadius: 10
     },
     productItemInputContainer: {
-        backgroundColor: "#159ad8",
+        backgroundColor: BUTTON,
         borderTopLeftRadius: 10,
         borderTopRightRadius: 10,
         flexDirection: "row",
@@ -355,27 +372,26 @@ const styles = StyleSheet.create({
         fontSize: 20,
         textAlign: "center",
         textAlignVertical: "center",
-        fontFamily: "PlaywriteGBJ_400Regular"
+        fontFamily: FONT
     },
     grandTotalContainer: {
         flex: 8,
-        backgroundColor: "#159ad8",
+        backgroundColor: BUTTON,
         flexDirection: "row"
     },
     grandTotalNumberContainer: {
-        flex: 1
+        flex: 12
     },
     grandTotalCurrencyContainer: {
-        flex: 1,
-        backgroundColor: "#0b745d",
-        padding: 10,
+        flex: 10,
+        backgroundColor: MAIN,
         alignItems: "center",
         justifyContent: "center"
     },
     grandTotalText: {
         flex: 1,
         fontSize: 24,
-        fontFamily: "PlaywriteGBJ_400Regular",
+        fontFamily: FONT,
         textAlign: "center",
         textAlignVertical: "center"
     }

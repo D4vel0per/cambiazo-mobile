@@ -1,23 +1,42 @@
 import SafeArea from "@/components/safeAreaWrapper";
+import { BACKGROUND, BACKGROUND_TEXT, BUTTON, MAIN_ALT } from "@/constants/colors";
 import { RENDER_CURRENCY } from "@/constants/main";
 import { useMoneyState } from "@/hooks/moneyStateHook";
 import { useSimpleCarousel } from "@/hooks/useSimpleCarousel";
 import { Currency, MoneyState } from "@/types/moneyStateTypes";
 import { Pressable, StyleSheet, Text, View } from "react-native";
+import { FONT } from "./_layout";
 
 export default function Index() {
   return (
-    <SafeArea>
-      <View style={styles.container}>
-          <View style={styles.title}>
-            <Text>CAMBIAZO!</Text>
-            <Text>¿No puedes con la inflación? ¡Nosotros tampoco!</Text>
-          </View>
-          <LastInfo />
-      </View>
-    </SafeArea>
+    <SafeArea>{
+      <Screen />
+    }</SafeArea>
   );
 }
+
+function Screen () {
+  return (
+    <View style={styles.container}>
+      <Hero />
+      <LastInfo />
+    </View>
+  )
+}
+
+function Hero () {
+  return (
+    <View style={styles.hero}>
+      <View style={[styles.heroTextContainer, {backgroundColor: MAIN_ALT}]}>
+        <Text style={[styles.heroText, {fontSize: 36}]}>Cambiazo!</Text>
+      </View>
+      <View style={[styles.heroTextContainer, {flex: 1}]}>
+        <Text style={styles.heroText}>{`El calmante para el dolor de cabeza del BCV`}</Text>
+      </View>
+    </View>
+  )
+}
+
 
 function LastInfo () {
   const [ currencies, selectNext ] = useSimpleCarousel<Currency>(["VES", "USD", "USD_P", "EUR", "EUR_P"])
@@ -39,9 +58,6 @@ function CurrencySelector ({ carousel, nextCurrency}:
 ) {
   return (
     <View style={styles.selectorContainer}>
-      <View style={styles.selectorTextContainer}>
-        <Text style={styles.selectorText}>{`Tasas del día`}</Text>
-      </View>
       <Pressable style={styles.selectorButton} onPress={() => {
         nextCurrency()
       }}>
@@ -67,37 +83,47 @@ function CurrencyElem({ currency, value }: {
   key: number, currency: Currency, value: number }
 ) {
   return (
-    <View>
-      <Text>{RENDER_CURRENCY[currency]}</Text>
-      <Text>{Math.round(value * 10000) / 10000}</Text>
+    <View style={styles.currencyElem}>
+      <Text style={styles.currencyElemText}>{RENDER_CURRENCY[currency]}</Text>
+      <Text style={styles.currencyElemText}>{Math.round(value * 10000) / 10000}</Text>
     </View>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    backgroundColor: BACKGROUND
   },
-  title: {
-    flex: 2,
-    padding: 5,
-    backgroundColor: "#126b0a"
+  hero: {
+    flex: 1.5,
+  },
+  heroTextContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  heroText: {
+    flex: 1,
+    width: "100%",
+    fontSize: 22,
+    fontFamily: FONT,
+    textAlign: "center",
+    textAlignVertical: "center",
+    color: BACKGROUND_TEXT,
+    padding: 10
   },
   product_container: {
     flex: 4,
-    backgroundColor: "#0a5b6b",
     width: "100%"
   },
   selectorContainer: {
     flex: 1,
-    backgroundColor: "#389db1",
-    flexDirection: "row",
-    alignItems: "center",
-    padding: 10
+    padding: 20
   },
   selectorButton: {
     flex: 1,
-    backgroundColor: "#8ebce2",
+    backgroundColor: BUTTON,
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 10,
@@ -109,14 +135,30 @@ const styles = StyleSheet.create({
     alignItems: "center"
   },
   selectorText: {
-    fontSize: 24
+    fontSize: 24,
+    color: BACKGROUND_TEXT,
+    fontFamily: FONT
   },
   selectorMessage: {
     flex: 1
   },
   priceView: {
-    paddingHorizontal: 20,
-    justifyContent: "center",
-    flex: 3
+    flex: 3,
+    gap: 10,
+    paddingBottom: 10
+  },
+  currencyElem: {
+    flex: 1,
+    padding: 10,
+    backgroundColor: MAIN_ALT,
+    flexDirection: "row"
+  },
+  currencyElemText: {
+    flex: 1,
+    textAlign: "center",
+    textAlignVertical: "center",
+    color: BACKGROUND_TEXT,
+    fontSize: 20,
+    fontFamily: FONT
   }
 });
