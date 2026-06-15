@@ -40,9 +40,9 @@ function Hero () {
 
 function LastInfo () {
   const [ currencies, selectNext ] = useSimpleCarousel<Currency>(["VES", "USD", "USD_P", "EUR", "EUR_P"])
-  const [ moneyState, setCurrentCurrency ] = useMoneyState("VES")
+  const [ resolved, moneyState, setCurrentCurrency ] = useMoneyState("VES")
 
-  return (
+  return resolved ? (
     <View style={styles.product_container}>
       <CurrencySelector carousel={currencies} nextCurrency={() => {
         setCurrentCurrency(currencies[1])
@@ -50,7 +50,7 @@ function LastInfo () {
       }}/>
       <CurrencyList moneyState={moneyState} carousel={currencies} />
     </View>
-  )
+  ) : null
 }
 
 function CurrencySelector ({ carousel, nextCurrency}: 

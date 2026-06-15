@@ -115,7 +115,7 @@ function GrandTotal ({ products }: {
 }) {
     const [ total, setTotal ] = useState<number>(0)
     const [ carousel, selectNext ] = useSimpleCarousel<Currency>(CAROUSEL_INITIAL_VALUES)
-    const [ moneyState, setCurrentCurrency ] = useMoneyState(carousel[0])
+    const [ , moneyState, setCurrentCurrency ] = useMoneyState(carousel[0])
 
     useEffect(() => {
         let total = 0

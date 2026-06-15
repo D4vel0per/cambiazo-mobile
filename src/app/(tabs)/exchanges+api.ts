@@ -29,10 +29,12 @@ export async function POST(request: Request) {
     const currency: Currency = await request.text() as Currency
     const BASE_URL = process.env.BASE_EXCHANGE_URL
 
-    if (!BASE_URL) 
+    if (!BASE_URL) {
         throw new StatusError(
             400, "Something went wrong when calling the exchanges API."
         )
+    }
+        
 
     const status = new CurrencyStatus(BASE_URL)
 
